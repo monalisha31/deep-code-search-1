@@ -35,7 +35,7 @@ def config_JointEmbeddingModel():
         'training_params': {           
             'batch_size': 128,
             'chunk_size':100000,
-            'nb_epoch': 2000,
+            'nb_epoch': 1,
             'validation_split': 0.2,
             'optimizer': 'adam',
             # 'optimizer': Adam(clip_norm=0.1),
