@@ -51,7 +51,7 @@ class SearchEngine:
         valid_every = self.train_params.get('valid_every', None)
         save_every = self.train_params.get('save_every', None)
         batch_size = self.train_params.get('batch_size', 128)
-        nb_epoch = self.train_params.get('nb_epoch', 10)
+        nb_epoch = self.train_params.get('nb_epoch', 1)
         split = self.train_params.get('validation_split', 0)
         
         val_loss = {'loss': 1., 'epoch': 0}
@@ -268,14 +268,14 @@ if __name__ == '__main__':
         engine.valid(model, -1, 10)
         
     elif args.mode=='repr_code':
-        assert config['training_params']['reload']>0, "please specify the number of epoch of the optimal checkpoint in config.py"
+        
         engine.load_model(model, config['training_params']['reload'])
         vecs = engine.repr_code(model)
         data_loader.save_code_reprs(vecs, data_path+config['data_params']['use_codevecs'])
         
     elif args.mode=='search':
         #search code based on a desc
-        assert config['training_params']['reload']>0, "please specify the number of epoch of the optimal checkpoint in config.py"
+        
         engine.load_model(model, config['training_params']['reload'])
         engine._code_reprs = data_loader.load_code_reprs(data_path+config['data_params']['use_codevecs'], engine._codebase_chunksize)
         engine._codebase = data_loader.load_codebase(data_path+config['data_params']['use_codebase'], engine._codebase_chunksize)
